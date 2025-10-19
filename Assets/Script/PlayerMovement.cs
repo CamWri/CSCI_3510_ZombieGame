@@ -4,18 +4,33 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
 
-    public float moveSpeed;
+    private float moveSpeed;
+    public float walkSpeed;
+    public float sprintSpeed;
+
+
     public float groundDrag;
+
+    [Header("Jumping")]
 
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
 
-    [Header("Keybinds")]
-    public KeyCode jumpKey;
+    [Header("Crouching")]
+    public float crouchSpeed;
+    public float crouchYScale;
+    private float startYScale;
 
-    [Header("Group Check")]
+
+    [Header("Keybinds")]
+    public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode sprintKey = KeyCode.LeftShift;
+    public KeyCode crouchKey = KeyCode.LeftControl;
+
+
+    [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
     bool grounded;
@@ -28,12 +43,45 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    public MovementState state;
+
+    public enum MovementState
+    {
+        walking,
+        sprinting,
+        crouching, 
+        air
+    }
+
+    private void StateHandler()
+    {
+        if (Input.GetKey(crouchKey))
+        {
+            state = MovementState.crouching;
+            moveSpeed = crouchSpeed;
+        } else if(grounded && Input.GetKey(sprintKey))
+        {
+            state = MovementState.sprinting;
+            moveSpeed = sprintSpeed;
+        } else if (grounded)
+        {
+            state = MovementState.walking;
+            moveSpeed = walkSpeed;
+        } else
+        {
+            state = MovementState.air;
+        }
+    }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.linearDamping = groundDrag;
+
         readyToJump = true;
+        
+        startYScale = transform.localScale.y;
     }
 
     private void Update() {
@@ -42,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
         MyInput();
         SpeedControl();
+        StateHandler();
 
         if (grounded)
         {
@@ -67,6 +116,17 @@ public class PlayerMovement : MonoBehaviour
             readyToJump = false;
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
+        }
+
+        if (Input.GetKeyDown(crouchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        }
+
+        if (Input.GetKeyUp(crouchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z); 
         }
     }
 
