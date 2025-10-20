@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 4926728124581902493}
   - component: {fileID: 4277173233510643467}
   - component: {fileID: 990468586002665722}
+  - component: {fileID: 4964193849354478462}
   m_Layer: 0
   m_Name: Player_CharacterController
   m_TagString: Untagged
@@ -120,6 +121,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   cameraTransform: {fileID: 0}
+--- !u!114 &4964193849354478462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120766114406696393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06070f9eb2d7794fac469ab1fb05e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+  player: {fileID: 0}
 --- !u!1 &2078487127628104377
 GameObject:
   m_ObjectHideFlags: 0
