@@ -67,7 +67,7 @@ public class CharacterMovement : MonoBehaviour
         move = Vector3.ClampMagnitude(move, 1f);
 
         // Speed logic
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.C))
         {
             currentSpeed = crouchSpeed;
             controller.height = crouchHeight;
