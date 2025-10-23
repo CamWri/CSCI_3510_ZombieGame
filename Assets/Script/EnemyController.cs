@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent agent;
     AudioSource groan;
     Animator animator;
+    private GameObject canvas;
+    private HUD hud;
 
     void Awake()
     {
@@ -33,6 +36,10 @@ public class EnemyController : MonoBehaviour
         {
             Debug.LogError($"{name}: No NavMesh found near {transform.position}. Check bake/layers/agent type.");
         }
+
+        canvas = GameObject.FindWithTag("Canvas");
+        hud = canvas.GetComponent<HUD>();
+
     }
 
     void Update()
@@ -70,6 +77,10 @@ public class EnemyController : MonoBehaviour
         {
             animator.SetFloat("forward", 0f, 0.1f, Time.deltaTime);
             FaceTarget();
+            if (!hud.Infected) 
+            {
+                hud.collisionWithZombie();
+            }
         }
     }
 
