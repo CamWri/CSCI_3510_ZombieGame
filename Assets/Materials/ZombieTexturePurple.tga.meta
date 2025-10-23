@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: daa68963c6dee2d46b3a0ad72d689a7c
-AssetOrigin:
-  serializedVersion: 1
-  productId: 259680
-  packageName: Zombie Monster Animations FREE
-  packageVersion: 1.0
-  assetPath: Assets/Kevin Iglesias/Zombie Animations/Materials/ZombieTexture.tga
-  uploadId: 719174
+guid: a6a3626529b02fb48b4f78c060df4358
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +65,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
